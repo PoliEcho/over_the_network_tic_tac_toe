@@ -36,34 +36,50 @@ cout << R"( ___       __   _______   ___       ________  ________  _____ ______ 
 
 
 bool ishost;
-bool repeat true;
+bool repeat = true;
+int board_size;
 {
 char charishost;
 while (repeat) {
-  cout << "will you be host of guest of the game?\n" << "(h/g): ";
+  cout << "will you be host or guest of this game?\n" << "(h/g): ";
   cin >> charishost;
 
-  repeat=false;
+  repeat = false;
 
   switch(charishost) {
-    case "h":
+    case 'h':
       ishost = true;
     break;
-    case "g":
+    case 'g':
       ishost = false;
     break;
     default:
       repeat = true;
   }
-}
+
 }
 
+repeat = true;
+
+while (repeat) {
 cout << "\nplease enter board size(for example: 3 for 3x3): ";
-int board_size;
-cin >> board_size;
 
-if(board_size <= 0) {
-  return 1;
+cin >> board_size;
+if(cin.fail()) {
+      cout << "integer please\n";
+      cin.clear();
+      cin.ignore(256,'\n');
+    } else {
+        if(board_size > 0) {
+          repeat = false;
+    } else {
+        cout << "positive integer please\n";
+    }
+
+
+  
+}
+}
 }
 
 char board[board_size*board_size];
