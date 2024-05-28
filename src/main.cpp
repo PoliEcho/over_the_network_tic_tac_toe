@@ -1,4 +1,8 @@
 #include<iostream>
+#include"global.hpp"
+#include"net.hpp"
+#include"input.hpp"
+
 
 using std::cout;
 using std::cin;
@@ -34,53 +38,19 @@ cout << R"( ___       __   _______   ___       ________  ________  _____ ______ 
         \|__|  \|__|\|_______|                 \|__|  \|__|\|__|\|_______|                 \|__|  \|_______|\|_______| 
 )" << '\n';
 
-
-bool ishost;
-bool repeat = true;
 int board_size;
+
+ishost_check();
+board_size_check();
+
 {
-char charishost;
-while (repeat) {
-  cout << "will you be host or guest of this game?\n" << "(h/g): ";
-  cin >> charishost;
-
-  repeat = false;
-
-  switch(charishost) {
-    case 'h':
-      ishost = true;
-    break;
-    case 'g':
-      ishost = false;
-    break;
-    default:
-      repeat = true;
-  }
-
-}
-
-repeat = true;
-
-while (repeat) {
-cout << "\nplease enter board size(for example: 3 for 3x3): ";
-
-cin >> board_size;
-if(cin.fail()) {
-      cout << "integer please\n";
-      cin.clear();
-      cin.ignore(256,'\n');
-    } else {
-        if(board_size > 0) {
-          repeat = false;
-    } else {
-        cout << "positive integer please\n";
-    }
-
-
-  
+int init_net_status = init_net();
+if(init_net_status != 0){
+  cout << "failed to initialize network\n";
+  return 2;
 }
 }
-}
+
 
 char board[board_size*board_size];
 
