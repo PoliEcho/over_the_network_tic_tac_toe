@@ -83,7 +83,7 @@ void port_check() {
     repeat = true;
 
     while (repeat) {
-        cout << "\nplease enter port you want to host on: ";
+        cout << "\nplease enter port you want to use: ";
 
         cin >> port;
         if(cin.fail()) {
