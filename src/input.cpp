@@ -73,3 +73,17 @@ void port_check() {
             }
         }
 }
+
+void ip_check() {
+    repeat = true;
+    char *serverIp;
+    while(repeat) {
+        cout << "enter host ip or hostname: ";
+        cin >> serverIp;
+        if(serverIp[0] == '\0') {
+            cerr << "enter something!\n";
+        } else {
+            repeat = false;
+        }
+    }
+}

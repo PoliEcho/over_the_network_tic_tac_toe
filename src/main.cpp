@@ -39,25 +39,29 @@ cout << R"( ___       __   _______   ___       ________  ________  _____ ______ 
         \|__|  \|__|\|_______|                 \|__|  \|__|\|__|\|_______|                 \|__|  \|_______|\|_______| 
 )" << '\n';
 
-int board_size;
+    int board_size;
 
-ishost_check();
+    ishost_check();
 
 
-if(ishost) {
-    board_size_check();
+
+    if(ishost) {
+        board_size_check();
+    } else {
+        ip_check();
+    }
     port_check();
-}
-{
-int init_net_status = init_net();
-if(init_net_status != 0){
-  cerr << "failed to initialize network\n";
-  return 2;
-}
-}
+
+    {
+    int init_net_status = init_net();
+    if(init_net_status != 0){
+    cerr << "failed to initialize network\n";
+    return 2;
+    }
+    }
 
 
-char board[board_size*board_size];
+    char board[board_size*board_size];
 
-  return 0;
-}
+    return 0;
+    }
