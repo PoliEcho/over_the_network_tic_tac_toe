@@ -4,9 +4,11 @@
 
 using std::cout;
 using std::cin;
+using std::cerr;
 
 int board_size;
 bool ishost;
+unsigned short port;
 bool repeat = true;
 void ishost_check() {
 
@@ -34,22 +36,40 @@ void board_size_check() {
 repeat = true;
 
 while (repeat) {
-cout << "\nplease enter board size(for example: 3 for 3x3): ";
+    cout << "\nplease enter board size(for example: 3 for 3x3): ";
 
-cin >> board_size;
-if(cin.fail()) {
-      cout << "integer please\n";
-      cin.clear();
-      cin.ignore(256,'\n');
-    } else {
-        if(board_size > 0) {
-          repeat = false;
-    } else {
-        cout << "positive integer please\n";
+    cin >> board_size;
+    if(cin.fail()) {
+        cerr << "integer please\n";
+        cin.clear();
+        cin.ignore(256,'\n');
+        } else {
+            if(board_size > 0) {
+                repeat = false;
+            } else {
+                cerr << "positive integer please\n";
+            }
+        }
     }
-
-
-  
 }
-}
+
+void port_check() {
+    repeat = true;
+
+    while (repeat) {
+        cout << "\nplease enter port you want to host on: ";
+
+        cin >> port;
+        if(cin.fail()) {
+            cerr << "integer please (range: 1-65535)\n";
+            cin.clear();
+            cin.ignore(256,'\n');
+            } else {
+                if(board_size > 0) {
+                    repeat = false;
+                } else {
+                    cerr << "positive integer please\n";
+                }
+            }
+        }
 }

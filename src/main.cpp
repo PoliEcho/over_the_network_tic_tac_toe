@@ -6,6 +6,7 @@
 
 using std::cout;
 using std::cin;
+using std::cerr;
 
 int main() {
 
@@ -41,12 +42,16 @@ cout << R"( ___       __   _______   ___       ________  ________  _____ ______ 
 int board_size;
 
 ishost_check();
-board_size_check();
 
+
+if(ishost) {
+    board_size_check();
+    port_check();
+}
 {
 int init_net_status = init_net();
 if(init_net_status != 0){
-  cout << "failed to initialize network\n";
+  cerr << "failed to initialize network\n";
   return 2;
 }
 }
