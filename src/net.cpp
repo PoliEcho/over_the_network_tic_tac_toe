@@ -20,12 +20,21 @@
 using std::cout;
 using std::cin;
 using std::cerr;
+using std::string;
+
+void handshake_failed() {
+    cerr << "handshake failed";
+    exit(3);
+}
 
 int init_net() {
+
     //buffer to send and receive messages with
     char msg[1500];
     
     if(ishost) {
+        //code for host
+
         //setup a socket and connection tools
         sockaddr_in servAddr;
         bzero((char*)&servAddr, sizeof(servAddr));
@@ -68,7 +77,36 @@ int init_net() {
         //also keep track of the amount of data sent as well
         int bytesRead, bytesWritten = 0;
 
-    } else {
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        bytesRead += recv(newSd, (char*)&msg, sizeof(msg), 0);
+        if( strcmp(msg, "concheck") != 0) {
+            handshake_failed();
+        }
+
+        string data = std::to_string(board_size);
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(newSd, (char*)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        bytesRead += recv(newSd, (char*)&msg, sizeof(msg), 0);
+        if(board_size != std::stoi( msg )) {
+            handshake_failed();
+        }
+
+        data = std::to_string(length);
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(newSd, (char*)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        bytesRead += recv(newSd, (char*)&msg, sizeof(msg), 0);
+        if(length != std::stoi( msg )) {
+            handshake_failed();
+        }
+
+        } else {
+            // code for client
 
         char *serverIp;
         //setup a socket and connection tools
@@ -93,6 +131,30 @@ int init_net() {
         int bytesRead, bytesWritten = 0;
         struct timeval start1, end1;
         gettimeofday(&start1, NULL);
+
+        string data;
+        data = "concheck";
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(clientSd, (char*)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        bytesRead += recv(clientSd, (char*)&msg, sizeof(msg), 0);
+        board_size = std::stoi( msg );
+
+        data = std::to_string(board_size);
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(clientSd, (char*)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        bytesRead += recv(clientSd, (char*)&msg, sizeof(msg), 0);
+        length = std::stoi( msg );
+
+        data = std::to_string(length);
+        memset(&msg, 0, sizeof(msg));//clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(clientSd, (char*)&msg, strlen(msg), 0);
 
     }
 

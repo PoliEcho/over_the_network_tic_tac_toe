@@ -6,6 +6,7 @@ using std::cout;
 using std::cin;
 using std::cerr;
 
+int length;
 int board_size;
 bool ishost;
 unsigned short port;
@@ -53,6 +54,31 @@ while (repeat) {
     }
 }
 
+void length_check() {
+    repeat = true;
+
+    while (repeat) {
+        cout << "\nplease enter needed length(e.g. how many symbols need to be next to each other to get point): ";
+
+        cin >> length;
+        if(cin.fail()) {
+            cerr << "integer please\n";
+            cin.clear();
+            cin.ignore(256,'\n');
+        } else {
+            if(length > 0) {
+                if(length > board_size) {
+                    cerr << "length cannot be biger than board size";
+                } else {
+                    repeat = false;
+                }
+                } else {
+                    cerr << "positive integer please\n";
+                }
+            }
+        }
+    }
+
 void port_check() {
     repeat = true;
 
@@ -65,7 +91,7 @@ void port_check() {
             cin.clear();
             cin.ignore(256,'\n');
             } else {
-                if(board_size > 0) {
+                if(port > 0) {
                     repeat = false;
                 } else {
                     cerr << "positive integer please\n";
@@ -76,14 +102,17 @@ void port_check() {
 
 void ip_check() {
     repeat = true;
-    char *serverIp;
+    std::string serverIp_temp;
+
     while(repeat) {
         cout << "enter host ip or hostname: ";
-        cin >> serverIp;
-        if(serverIp[0] == '\0') {
+        cin >> serverIp_temp;
+        if(serverIp_temp == "") {
             cerr << "enter something!\n";
         } else {
+
             repeat = false;
+            const char *serverIp = serverIp_temp.c_str();
         }
     }
 }
