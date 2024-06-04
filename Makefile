@@ -1,5 +1,5 @@
 CC = g++
-CC_FLAGS = 
+CC_FLAGS =
 
 all: build/bin/over_the_network_tic_tac_toe
 
