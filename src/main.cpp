@@ -1,10 +1,10 @@
 #include <cstddef>
-#include<iostream>
+#include <iostream>
 #include <vector>
-#include"global.hpp"
-#include"net.hpp"
-#include"input.hpp"
-#include"gameplay.hpp"
+#include "global.hpp"
+#include "net.hpp"
+#include "input.hpp"
+#include "gameplay.hpp"
 
 
 using std::cout;
@@ -48,8 +48,9 @@ int main() {
 
 
 
-    if(ishost) {
+    if (ishost) {
         board_size_check();
+        length_check();
     } else {
         ip_check();
     }
@@ -57,7 +58,7 @@ int main() {
 
     {
         int init_net_status = init_net();
-        if(init_net_status != 0){
+        if (init_net_status != 0) {
             cerr << "failed to initialize network\n";
             return 2;
         }
@@ -73,4 +74,4 @@ int main() {
 
 
     return 0;
-    }
+}

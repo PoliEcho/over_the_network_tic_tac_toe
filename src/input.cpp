@@ -1,6 +1,6 @@
-#include<iostream>
-#include"global.hpp"
-#include"input.hpp"
+#include <iostream>
+#include "global.hpp"
+#include "input.hpp"
 
 using std::cout;
 using std::cin;
@@ -14,39 +14,39 @@ std::string serverIp_str;
 bool repeat = true;
 void ishost_check() {
 
-char charishost;
-while (repeat) {
-  cout << "will you be host or guest of this game?\n" << "(h/g): ";
-  cin >> charishost;
+    char charishost;
+    while (repeat) {
+        cout << "will you be host or guest of this game?\n"
+             << "(h/g): ";
+        cin >> charishost;
 
-  repeat = false;
+        repeat = false;
 
-  switch(charishost) {
-    case 'h':
-      ishost = true;
-    break;
-    case 'g':
-      ishost = false;
-    break;
-    default:
-      repeat = true;
-  }
-
-}
+        switch (charishost) {
+        case 'h':
+            ishost = true;
+            break;
+        case 'g':
+            ishost = false;
+            break;
+        default:
+            repeat = true;
+        }
+    }
 }
 void board_size_check() {
-repeat = true;
+    repeat = true;
 
-while (repeat) {
-    cout << "\nplease enter board size(for example: 3 for 3x3): ";
+    while (repeat) {
+        cout << "\nplease enter board size(for example: 3 for 3x3): ";
 
-    cin >> board_size;
-    if(cin.fail()) {
-        cerr << "integer please\n";
-        cin.clear();
-        cin.ignore(256,'\n');
+        cin >> board_size;
+        if (cin.fail()) {
+            cerr << "integer please\n";
+            cin.clear();
+            cin.ignore(256, '\n');
         } else {
-            if(board_size > 0) {
+            if (board_size > 0) {
                 repeat = false;
             } else {
                 cerr << "positive integer please\n";
@@ -62,23 +62,23 @@ void length_check() {
         cout << "\nplease enter needed length(e.g. how many symbols need to be next to each other to get point): ";
 
         cin >> length;
-        if(cin.fail()) {
+        if (cin.fail()) {
             cerr << "integer please\n";
             cin.clear();
-            cin.ignore(256,'\n');
+            cin.ignore(256, '\n');
         } else {
-            if(length > 0) {
-                if(length > board_size) {
+            if (length > 0) {
+                if (length > board_size) {
                     cerr << "length cannot be biger than board size";
                 } else {
                     repeat = false;
                 }
-                } else {
-                    cerr << "positive integer please\n";
-                }
+            } else {
+                cerr << "positive integer please\n";
             }
         }
     }
+}
 
 void port_check() {
     repeat = true;
@@ -87,27 +87,27 @@ void port_check() {
         cout << "\nplease enter port you want to use: ";
 
         cin >> port;
-        if(cin.fail()) {
+        if (cin.fail()) {
             cerr << "integer please (range: 1-65535)\n";
             cin.clear();
-            cin.ignore(256,'\n');
+            cin.ignore(256, '\n');
+        } else {
+            if (port > 0) {
+                repeat = false;
             } else {
-                if(port > 0) {
-                    repeat = false;
-                } else {
-                    cerr << "positive integer please\n";
-                }
+                cerr << "positive integer please\n";
             }
         }
+    }
 }
 
 void ip_check() {
     repeat = true;
 
-    while(repeat) {
+    while (repeat) {
         cout << "enter host ip or hostname: ";
         cin >> serverIp_str;
-        if(serverIp_str == "") {
+        if (serverIp_str == "") {
             cerr << "enter something!\n";
         } else {
 
