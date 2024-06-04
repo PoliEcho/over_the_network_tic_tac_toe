@@ -1,8 +1,10 @@
 #include <cstddef>
 #include<iostream>
+#include <vector>
 #include"global.hpp"
 #include"net.hpp"
 #include"input.hpp"
+#include"gameplay.hpp"
 
 
 using std::cout;
@@ -40,7 +42,7 @@ int main() {
         \|__|  \|__|\|_______|                 \|__|  \|__|\|__|\|_______|                 \|__|  \|_______|\|_______| 
 )" << '\n';
 
-    int board_size;
+
 
     ishost_check();
 
@@ -62,18 +64,12 @@ int main() {
     }
 
 
-    char board[board_size*board_size];
 
 
-    int ncord = 0;
-    for (int i = 0; i < sizeof(board); i++) {
-        board[ncord] = '_';
-        ncord++;
-    }
+    //alocate board
+    std::vector<std::vector<char>> board(board_size, std::vector<char>(board_size, '_'));
 
-    if(ishost) {
-        
-    }
+    printBoard(board);
 
 
     return 0;

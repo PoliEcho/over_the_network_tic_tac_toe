@@ -22,6 +22,8 @@ using std::cin;
 using std::cerr;
 using std::string;
 
+
+
 void handshake_failed() {
     cerr << "handshake failed";
     exit(3);
@@ -107,8 +109,7 @@ int init_net() {
 
         } else {
             // code for client
-
-        char *serverIp;
+           const char *serverIp = serverIp_str.c_str();
         //setup a socket and connection tools
         struct hostent* host = gethostbyname(serverIp);
         sockaddr_in sendSockAddr;

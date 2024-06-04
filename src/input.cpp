@@ -10,6 +10,7 @@ int length;
 int board_size;
 bool ishost;
 unsigned short port;
+std::string serverIp_str;
 bool repeat = true;
 void ishost_check() {
 
@@ -102,17 +103,15 @@ void port_check() {
 
 void ip_check() {
     repeat = true;
-    std::string serverIp_temp;
 
     while(repeat) {
         cout << "enter host ip or hostname: ";
-        cin >> serverIp_temp;
-        if(serverIp_temp == "") {
+        cin >> serverIp_str;
+        if(serverIp_str == "") {
             cerr << "enter something!\n";
         } else {
 
             repeat = false;
-            const char *serverIp = serverIp_temp.c_str();
         }
     }
 }
