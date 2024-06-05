@@ -1,4 +1,6 @@
+#include <string.h>
 #include <iostream>
+#include <string>
 #include "global.hpp"
 #include "input.hpp"
 
@@ -8,6 +10,7 @@ using std::cerr;
 
 int length;
 int board_size;
+int points_req;
 bool ishost;
 unsigned short port;
 std::string serverIp_str;
@@ -80,6 +83,32 @@ void length_check() {
     }
 }
 
+void points_requied() {
+    repeat = true;
+
+    while (repeat) {
+        cout << "\nhow many points will be requied to beat game: ";
+
+        cin >> points_req;
+        if (cin.fail()) {
+            cerr << "integer please\n";
+            cin.clear();
+            cin.ignore(256, '\n');
+        } else {
+            if (points_req > 0) {
+                if (points_req * length < board_size * board_size) {
+                    repeat = false;
+                } else {
+                    cerr << "too large number max number is " << (((board_size * board_size) / length) - 1) << "\n";
+                }
+            } else {
+                cerr << "positive integer please\n";
+            }
+        }
+    }
+}
+
+
 void port_check() {
     repeat = true;
 
@@ -114,4 +143,33 @@ void ip_check() {
             repeat = false;
         }
     }
+}
+
+std::string choise_check() {
+    int x_cord;
+    int y_cord;
+    char sure;
+    while (true) {
+
+        cout << "\nchoose x(e.g. horisontal) cordinates of you target square:";
+        cin >> x_cord;
+        if (x_cord < board_size && x_cord >= 0) {
+            break;
+        }
+
+        cout << "\nchoose y(e.g. vertical) cordinates of you target square:";
+        cin >> y_cord;
+        if (y_cord < board_size && y_cord >= 0) {
+            break;
+        }
+
+        cout << "\nare you sure [Y/n]";
+        std::cin.get(sure);
+        if (sure != 'n') {
+            break;
+        }
+    }
+    std::string loc;
+    loc = std::to_string(x_cord) + " " + std::to_string(y_cord);
+    return loc;
 }

@@ -4,3 +4,4 @@ extern bool ishost;
 extern unsigned short port;
 extern int length;
 extern std::string serverIp_str;
+extern int points_req;

@@ -1,5 +1,7 @@
 CC = g++
-CC_FLAGS =
+CC_FLAGS = -s
+#debug flags:
+#CC_FLAGS = -ggdb
 
 all: build/bin/over_the_network_tic_tac_toe
 

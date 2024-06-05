@@ -51,6 +51,7 @@ int main() {
     if (ishost) {
         board_size_check();
         length_check();
+        points_requied();
     } else {
         ip_check();
     }
