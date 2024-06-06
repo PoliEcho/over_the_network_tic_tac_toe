@@ -1,9 +1,13 @@
 #include <iostream>
 #include "gameplay.hpp"
 #include "global.hpp"
+#include "color.hpp"
 using std::cout;
 using std::cin;
 using std::cerr;
+
+int points_my;
+int points_en;
 
 void printBoard(const std::vector<std::vector<char>>& board) {
     cout << "\n ┌";
@@ -38,4 +42,8 @@ void printBoard(const std::vector<std::vector<char>>& board) {
         cout << "─┘";
     }
     }
+}
+
+void print_gameinfo() {
+    cout << "\npoint info:\nyou: " << BLUE << points_my << RESET << "\nenemy: " << RED << points_en << RESET << "\n";
 }

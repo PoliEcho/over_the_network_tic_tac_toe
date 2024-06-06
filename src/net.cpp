@@ -107,6 +107,17 @@ int init_net() {
             handshake_failed();
         }
 
+        data = std::to_string(points_req);
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(newSd, (char *)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        bytesRead += recv(newSd, (char *)&msg, sizeof(msg), 0);
+        if (points_req != std::stoi(msg)) {
+        handshake_failed();
+        }
+
     } else {
         // code for client
         const char *serverIp = serverIp_str.c_str();
@@ -156,7 +167,20 @@ int init_net() {
         memset(&msg, 0, sizeof(msg)); //clear the buffer
         strcpy(msg, data.c_str());
         bytesWritten += send(clientSd, (char *)&msg, strlen(msg), 0);
+
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        bytesRead += recv(clientSd, (char *)&msg, sizeof(msg), 0);
+        points_req = std::stoi(msg);
+
+        data = std::to_string(length);
+        memset(&msg, 0, sizeof(msg)); //clear the buffer
+        strcpy(msg, data.c_str());
+        bytesWritten += send(clientSd, (char *)&msg, strlen(msg), 0);
     }
 
     return 0;
+}
+
+void end_conn() {
+    
 }

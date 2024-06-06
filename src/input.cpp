@@ -1,8 +1,10 @@
 #include <string.h>
 #include <iostream>
 #include <string>
+#include<array>
 #include "global.hpp"
 #include "input.hpp"
+#include "net.hpp"
 
 using std::cout;
 using std::cin;
@@ -145,7 +147,7 @@ void ip_check() {
     }
 }
 
-std::string choise_check() {
+std::array<int,2> choise_check() {
     int x_cord;
     int y_cord;
     char sure;
@@ -169,7 +171,6 @@ std::string choise_check() {
             break;
         }
     }
-    std::string loc;
-    loc = std::to_string(x_cord) + " " + std::to_string(y_cord);
+    std::array<int,2> loc={x_cord,y_cord};
     return loc;
 }

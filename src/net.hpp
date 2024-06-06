@@ -1,2 +1,2 @@
 extern int init_net();
-void init_var();
+void end_conn();
