@@ -47,3 +47,7 @@ void printBoard(const std::vector<std::vector<char>>& board) {
 void print_gameinfo() {
     cout << "\npoint info:\nyou: " << BLUE << points_my << RESET << "\nenemy: " << RED << points_en << RESET << "\n";
 }
+
+void check_if_point(const std::vector<std::vector<char>> &board) {
+       
+}

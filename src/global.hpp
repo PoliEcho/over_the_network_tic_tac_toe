@@ -8,3 +8,4 @@ extern std::string serverIp_str;
 extern int points_req;
 extern int points_my;
 extern int points_en;
+extern int sel[2]; 

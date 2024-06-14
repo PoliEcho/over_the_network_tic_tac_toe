@@ -1,7 +1,7 @@
 #include <string.h>
 #include <iostream>
 #include <string>
-#include<array>
+#include <array>
 #include "global.hpp"
 #include "input.hpp"
 #include "net.hpp"
@@ -16,7 +16,9 @@ int points_req;
 bool ishost;
 unsigned short port;
 std::string serverIp_str;
+int sel[2];
 bool repeat = true;
+
 void ishost_check() {
 
     char charishost;
@@ -147,22 +149,26 @@ void ip_check() {
     }
 }
 
-std::array<int,2> choise_check() {
+void choise_check() {
     int x_cord;
     int y_cord;
     char sure;
     while (true) {
 
-        cout << "\nchoose x(e.g. horisontal) cordinates of you target square:";
-        cin >> x_cord;
-        if (x_cord < board_size && x_cord >= 0) {
-            break;
+        while (true) {
+            cout << "\nchoose x(e.g. horisontal) cordinates of you target square:";
+            cin >> x_cord;
+            if (x_cord < board_size && x_cord >= 0) {
+                break;
+            }
         }
 
-        cout << "\nchoose y(e.g. vertical) cordinates of you target square:";
-        cin >> y_cord;
-        if (y_cord < board_size && y_cord >= 0) {
-            break;
+        while (true) {
+            cout << "\nchoose y(e.g. vertical) cordinates of you target square:";
+            cin >> y_cord;
+            if (y_cord < board_size && y_cord >= 0) {
+                break;
+            }
         }
 
         cout << "\nare you sure [Y/n]";
@@ -171,6 +177,6 @@ std::array<int,2> choise_check() {
             break;
         }
     }
-    std::array<int,2> loc={x_cord,y_cord};
-    return loc;
+    sel[0] = x_cord;
+    sel[1] = y_cord;
 }

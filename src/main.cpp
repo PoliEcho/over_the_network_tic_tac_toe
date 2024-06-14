@@ -5,6 +5,7 @@
 #include "net.hpp"
 #include "input.hpp"
 #include "gameplay.hpp"
+#include "color.hpp"
 
 
 using std::cout;
@@ -73,6 +74,14 @@ int main() {
 
     printBoard(board);
 
+    while (true){
+        choise_check();
+        if(board[sel[0]][sel[1]] == '_') {
+            break;
+        }
+        cerr <<  RED << "\ninvalid selection" << RESET;
+    }
+    check_if_point(board);
 
     return 0;
 }
