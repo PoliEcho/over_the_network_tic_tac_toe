@@ -12,6 +12,9 @@ using std::cout;
 using std::cin;
 using std::cerr;
 
+char char_my;
+char char_en;
+
 int main() {
 
     cout << R"( ___       __   _______   ___       ________  ________  _____ ______   _______           _________  ________
@@ -53,8 +56,12 @@ int main() {
         board_size_check();
         length_check();
         points_requied();
+        char_my = 'x';
+        char_en = 'o';
     } else {
         ip_check();
+        char_my = 'o';
+        char_en = 'x';
     }
     port_check();
 
